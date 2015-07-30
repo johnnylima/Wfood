@@ -2,11 +2,11 @@
 
 /**
  * <b>Create.class:</b>
- * Classe responsável por cadastros genéticos no banco de dados!
+ * Classe responsável por cadastros genéricos no banco de dados!
  * 
- * @copyright (c) 2013, Robson V. Leite UPINSIDE TECNOLOGIA
+ * @copyright (c) 2015, Johnny Lima Wfood
  */
-class Create extends Conn {
+class create extends Conn {
 
     private $Tabela;
     private $Dados;
@@ -67,7 +67,7 @@ class Create extends Conn {
             $this->Result = $this->Conn->lastInsertId();
         } catch (PDOException $e) {
             $this->Result = null;
-            WSErro("<b>Erro ao cadastrar:</b> {$e->getMessage()}", $e->getCode());
+            WFMsg("<b>Erro ao cadastrar:</b> {$e->getMessage()}", $e->getCode());
         }
     }
 

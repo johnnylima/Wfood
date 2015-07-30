@@ -2,11 +2,11 @@
 
 /**
  * <b>Read.class:</b>
- * Classe responsável por leituras genéticas no banco de dados!
+ * Classe responsável por leituras genéricas no banco de dados!
  * 
- * @copyright (c) 2014, Robson V. Leite UPINSIDE TECNOLOGIA
+ * @copyright (c) 2015, Johnny Lima Wfood
  */
-class Read extends Conn {
+class read extends Conn {
 
     private $Select;
     private $Places;
@@ -103,7 +103,7 @@ class Read extends Conn {
             $this->Result = $this->Read->fetchAll();
         } catch (PDOException $e) {
             $this->Result = null;
-            WSErro("<b>Erro ao Ler:</b> {$e->getMessage()}", $e->getCode());
+            WFMsg("<b>Erro ao Ler:</b> {$e->getMessage()}", $e->getCode());
         }
     }
 

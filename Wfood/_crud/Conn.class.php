@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Conn.class [ CONEXÃO ]
+ * conn.class [ CONEXÃO ]
  * Classe abstrata de conexão. Padrão SingleTon.
  * Retorna um objeto PDO pelo método estático getConn();
  * 
- * @copyright (c) 2013, Robson V. Leite UPINSIDE TECNOLOGIA
+ * @copyright (c) 2015, Johnny Lima Wfood
  */
 abstract class Conn {
 
