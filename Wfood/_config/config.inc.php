@@ -26,53 +26,46 @@ define('DBSA', 'wfood');
   define('REQUIRE_PATH', 'themes' . DIRECTORY_SEPARATOR . THEME);
  */
 
-
-
-
 // AUTO LOAD DE CLASSES ####################
 function __autoload($Class) {
 
-    $root = str_replace("/", DIRECTORY_SEPARATOR, dirname($_SERVER['SCRIPT_FILENAME']));
-    $arrClass = dir_file($root);
-    $arrFileClass = [];
+    $rootDir = str_replace("/", DIRECTORY_SEPARATOR, dirname($_SERVER['SCRIPT_FILENAME']));
+    $ClassExtension = ($Class . ".class.php");
 
-    foreach ($arrClass as $dirFileClass):
-        foreach ($dirFileClass[] as $fileClass):
-            if (stripos($fileClass, "class.php")):
-                $arrFileClass = $fileClass;
-                
+    /*     * Faz chamada a função DIR_FILE, onde serão listados todos os arquivos e
+     * diretórios.
+     * 
+     * A seguir é feita um verificação em todos os caminhos (arquivos) para
+     * confirmar se existe o nome da classe chamada em algum deles.
+     * 
+     * O exit faz com que seja percorrido somente o primeiro array do DIR_FILE,
+     * ou seja, somente o array "arquivos" descartando o segundo array "diretorio".
+     * Dessa forma elimina perda de tempo à mais. 
+     * 
+     * Se for achado a string da $ClassExtension no array de caminhos, será passado
+     * para $FileClass, para ser submetido a vericação de existência na 
+     * "VALIDAÇÃO DE CAMINHOS"
+     */
+    $FileClass = null;
+    foreach (DIR_FILE($rootDir) as $arr2DirFile):
+        foreach ($arr2DirFile as $arrFileClass):
+            if (stripos($arrFileClass, $ClassExtension)):
+                $FileClass = $arrFileClass;
             endif;
         endforeach;
     endforeach;
-    
 
-
-
-    foreach ($cDir as $dirName):
-        $arqv = substr_replace((getcwd() . "\n"), '', -1) . DIRECTORY_SEPARATOR . $dirName . DIRECTORY_SEPARATOR . $Class . '.class.php';
-        //$arqv = $home . DIRECTORY_SEPARATOR . $dirName . DIRECTORY_SEPARATOR . $Class . '.class.php';
-        //$arqv = substr_replace( (getcwd() . "\n") , '', -1) . '\teste.class.php';
-
-        if (!$iDir && file_exists($arqv) && !is_dir($arqv)):
-            echo "<b>teste de classe ok</b><br><br><hr>";
-
-            include_once ($arqv);
-            $iDir = true;
-
-        endif;
-    endforeach;
-
-    if (!$iDir):
-        echo getcwd() . "\n" . '\teste.class.php' . "<hr>";
-        echo __DIR__ . "\n <hr>";
-        echo $arqv . "<hr>"; //__DIR__ . DIRECTORY_SEPARATOR . $dirName . DIRECTORY_SEPARATOR . $Class . '.class.php'
-    /*
-      trigger_error("Não foi possível incluir {$Class}.class.php", E_USER_ERROR);
-
-      die;
-     //*/
+    // VALIDAÇÃO DE CAMINHOS
+    $empytDir = null;
+    if (!$empytDir && file_exists($FileClass) && !is_dir($FileClass)):
+        include_once ($FileClass);
+        $empytDir = true;
     endif;
-    //*/
+
+    if (!$empytDir):
+        trigger_error("A Classe <b><u>{$Class}</u></b> não existe.", E_USER_ERROR);
+        die;
+    endif;
 }
 
 // TRATAMENTO DE TIPO DE MENSAGENS#####################
@@ -123,7 +116,7 @@ set_error_handler('PHPMsg');
  * @result array
  */
 // LISTA DE ARQUIVOS E DIRETORIOS. COM CAMINHO A PARTIR DO ROOT;
-function dir_file($root = '.') {
+function DIR_FILE($root = '.') {
     $files = array('arquivo' => array(), 'diretorio' => array());
     $directories = array();
     $last_letter = $root[strlen($root) - 1];
@@ -150,6 +143,5 @@ function dir_file($root = '.') {
             closedir($handle);
         }
     }
-
     return $files;
 }
