@@ -6,7 +6,7 @@
  * 
  * @copyright (c) 2015, Johnny Lima Wfood
  */
-class create extends Conn {
+class create extends conn {
 
     private $Tabela;
     private $Dados;
@@ -32,6 +32,7 @@ class create extends Conn {
         $this->getSyntax();
         $this->Execute();
     }
+
 
     /**
      * <b>Obter resultado:</b> Retorna o ID do registro inserido ou FALSE caso nem um registro seja inserido! 

@@ -7,7 +7,7 @@
  * 
  * @copyright (c) 2015, Johnny Lima Wfood
  */
-abstract class Conn {
+abstract class conn {
 
     private static $Host = HOST;
     private static $User = USER;
