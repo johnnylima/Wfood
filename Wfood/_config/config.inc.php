@@ -42,42 +42,20 @@ function __autoload($Class) {
      * Se for achado a string da $ClassExtension no $file (caminho), será
      * chamado o include_once;
      */
-
-    $directories = array();
+    
     $root = (isset($root) ? $root : '.'); // Coloque o caminho raiz!
-    $directories[] = ($root[strlen($root) - 1] == '\\' || $root[strlen($root) - 1] == '/') ? $root : $root . DIRECTORY_SEPARATOR;
+    $root = ($root[strlen($root) - 1] == '\\' || $root[strlen($root) - 1] == '/') ? $root : $root . DIRECTORY_SEPARATOR;
     $empytfile = null;
-
-    while (sizeof($directories)):
-        $dir = array_pop($directories);
-        echo "<hr>" . $dir . "<hr>";
-        if ($handle = opendir($dir)):
-            $c = 0;
-
-            while ($file = readdir($handle)):
-
-                $c++;
-                echo "<b>" . $c . " - " . $file . "</b><br>";
-                if ($file == '.' || $file == '..'):
-                    continue;   
-                
-                endif;
-                $file = $dir . $file;
-                if (is_dir($file) && stripos($file, "_")):
-                    $directory_path = $file . DIRECTORY_SEPARATOR;
-                    array_push($directories, $directory_path);
-                elseif (is_file($file) && stripos($file, $ClassExtension)):
-                    $FileClass = $file;
-                    include_once ($FileClass);
-                    $empytfile = true;
-                //var_dump($FileClass);
-                else:
-                    echo "--" . $file . "<br>";
-                endif;
-            endwhile;
-            closedir($handle);
+    
+    $car = "*";
+    $glob = glob($car, GLOB_MARK);
+    while (!empty(glob($car, GLOB_MARK))):
+        if (!empty($FileClass = glob(substr_replace($car, "", -1) . $ClassExtension))):
+            include_once ($root.$FileClass[0]);
+            //var_dump($root.$FileClass[0]);
+            $empytfile = true;
         endif;
-    //echo"ok";
+        $car = $car . "\*";
     endwhile;
 
     if (!$empytfile):
