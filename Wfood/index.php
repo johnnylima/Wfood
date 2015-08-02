@@ -10,11 +10,13 @@ require('./_config/config.inc.php');
     <body>
         <?php
 
-        $new = new create;
-
-        var_dump($new);
-
-        echo "Uso de memoria:" . (memory_get_usage() / 100000) . " Mb<hr>";
+//        $new = new create;
+//
+//        var_dump($new);
+//
+//        echo "Uso de memoria:" . (memory_get_usage() / 100000) . " Mb<hr>";
+        
+header("location: ./_app/_user/view/user.php");
         ?>
     </body>
 </html>
