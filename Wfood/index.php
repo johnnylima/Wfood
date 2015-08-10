@@ -6,17 +6,27 @@ require('./_config/config.inc.php');
     <head>
         <meta charset="UTF-8">
         <title></title>
+
+        <!--MOBILE--> 
+        <!--<script async defer src="resources/library/jquery/mb/jquery.mobile-1.4.5.min.js"></script>-->
+        <link href="resources/style/css/jquery/mb/jquery.mobile.structure-1.4.5.css" rel="stylesheet">
+        <link href="resources/style/css/teste-theme.css" rel="stylesheet">
+
+        <!--JQUERY-->
+        <script async defer src="resources/library/jquery/jquery-2.1.4.min.js"></script>
+
+        <!--MATRIZ-->
+        <script async defer src="_config/config.inc.js"></script>
+
     </head>
     <body>
         <?php
-
 //        $new = new create;
 //
 //        var_dump($new);
 //
 //        echo "Uso de memoria:" . (memory_get_usage() / 100000) . " Mb<hr>";
-        
-header("location: ./_app/_user/view/user.php");
+//        header("location: ./teste_implementacao/teste.html.php");
         ?>
     </body>
 </html>
