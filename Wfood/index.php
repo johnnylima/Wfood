@@ -17,6 +17,7 @@ require('./_config/config.inc.php');
 //        echo "Uso de memoria:" . (memory_get_usage() / 100000) . " Mb<hr>";
         
 //header("location: ./_app/_user/view/user.php");
+// teste de ch
         ?>
     </body>
 </html>
