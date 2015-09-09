@@ -27,6 +27,19 @@ class user {
             $this->Create();
         endif;
     }
+    
+    /**
+     * <b>Ler Tabela:</b> Faz leitura no esquema da tabela, buscando o nome dos
+     * campos da tabela.
+     * @param string $tabela = tabela a ser consultada.
+     */
+    public function ExeReadTable(string $tabela) {
+        $this->tabela = $tabela;
+
+        if ($this->Result):
+            $this->ReadTable($tabela);
+        endif;
+    }
 
     function getResult() {
         return $this->Result;
@@ -57,6 +70,11 @@ class user {
             $this->Msg = ["O usuário <b>{$this->Data['user_name']}</b> foi cadastrado com sucesso no sistema!", WS_ACCEPT];
             $this->Result = $Create->getResult();
         endif;
+    }
+    
+    //Consulta Tabela
+    private function ReadTable($tabela) {
+        $this->query = "SELECT COLUMN_NAME, DATA_TYPE FROM information_schema.columns WHERE table_name = '{$tabela}' AND ORDINAL_POSITION > 1";
     }
 
 }

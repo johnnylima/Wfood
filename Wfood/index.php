@@ -16,17 +16,35 @@ require('./_config/config.inc.php');
         <script async defer src="resources/library/jquery/jquery-2.1.4.min.js"></script>
 
         <!--MATRIZ-->
-        <script async defer src="_config/config.inc.js"></script>
+        <!--<script async defer src="_config/config.inc.js"></script>-->
+
+        <!--TESTE-->
+        <script async defer src="_app/_user/store/user.js"></script>
+
 
     </head>
     <body>
         <?php
-//        $new = new create;
-//
-//        var_dump($new);
-//
-//        echo "Uso de memoria:" . (memory_get_usage() / 100000) . " Mb<hr>";
-//        header("location: ./teste_implementacao/teste.html.php");
+        /*
+        $new = new create;
+
+        var_dump($new);
+
+        echo "Uso de memoria:" . (memory_get_usage() / 100000) . " Mb<hr>";
+
+
+
+        $Query = "SELECT COLUMN_NAME FROM information_schema.columns WHERE table_name = 'usuario' AND ORDINAL_POSITION > 1";
+
+        //  $nCT = nameColumnTable
+        $nCT = new read;
+        $nCT->FullRead($Query);
+        $result = $nCT->getResult();
+
+        var_dump($result);
+//        header("location: ./_app/_user/view/user/cadastro.html");
+
+    */
         ?>
     </body>
 </html>

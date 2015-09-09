@@ -1,3 +1,11 @@
+<script async defer >
+    $(document).ready(function(){
+        $.getScript("./_app/_user/store/user.js", function(){
+            console.log("carregado");
+        });
+    });
+</script>
+
 <div style="width: 500px;" class="ui-body ui-body-a ui-corner-all" data-form="ui-body-a" >
     <form method="POST" name="user">
         <div class="ui-field-contain">

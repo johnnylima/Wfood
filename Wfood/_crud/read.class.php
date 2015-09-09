@@ -6,7 +6,7 @@
  * 
  * @copyright (c) 2015, Johnny Lima Wfood
  */
-class read extends Conn {
+class read extends conn {
 
     private $Select;
     private $Places;
