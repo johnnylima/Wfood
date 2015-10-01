@@ -11,12 +11,18 @@ $(document).ready(function () {
      */
 
     camposForm = new Array();
-    if (consultaTab("l_tab", "usuario")){
-        console.log("ois");
-    }
-    
-    
-    //cadastro();
+    GeraForm = consultaTab("l_tab", "usuario");
+
+    /*
+     if (GeraForm) {
+     GeraForm.done(
+     function(dados){
+     console.log(dados[0].COLUMN_NAME);
+     });
+     }//*/
+
+
+    cadastro();
 
 
     /**
@@ -60,24 +66,32 @@ $(document).ready(function () {
                         method: "POST",
                         name: "user",
                         append: [
-                            /*###################### < DIV CONTAIN > /*######################*/
-                            $('<div>', {
-                                class: "ui-field-contain",
-                                /*###################### < DIV > /*######################*/
-                                append: $('<div>', {
-                                    class: "ui-input-text ui-body-a ui-corner-all ui-shadow-inset",
-                                    /*###################### < INPUT > /*######################*/
-                                    append: $('<input>', {
-                                        type: "text",
-                                        name: "nome",
-                                        id: "nome",
-                                        'data-theme': "a",
-                                        'data-form': "ui-body-a",
-                                        class: "input",
-                                        placeholder: "Nome"
-                                    })
-                                })
+                            GeraForm.done(function (dados) {
+                                $.each(dados, function (key, value) {
+                                    console.log(value.COLUMN_NAME);
 
+
+
+                                    /*###################### < DIV CONTAIN > /*######################//*/
+                                    $('<div>', {
+                                        class: "ui-field-contain",
+                                        /*###################### < DIV > /*######################//*/
+                                        append: $('<div>', {
+                                            class: "ui-input-text ui-body-a ui-corner-all ui-shadow-inset",
+                                            /*###################### < INPUT > /*######################//*/
+                                            append: $('<input>', {
+                                                type: "text",
+                                                name: value.COLUMN_NAME,
+                                                id: value.COLUMN_NAME,
+                                                'data-theme': "a",
+                                                'data-form': "ui-body-a",
+                                                class: "input",
+                                                placeholder: value.COLUMN_NAME
+                                            })
+                                        })
+
+                                    });
+                                });
                             }),
                             /*###################### < DIV CONTAIN > /*######################*/
                             $('<div>', {
@@ -89,7 +103,7 @@ $(document).ready(function () {
                                     class: "ui-shadow ui-btn ui-corner-all ui-btn-a",
                                     text: "Enviar"
                                 })
-                            })]
+                            })]//*/
                     })
                 });
         //#CRIAR FORMULÁRIO
@@ -117,14 +131,15 @@ $(document).ready(function () {
 
         dados = ac + tb + dados;
 
-        //console.log(form);
+        //console.log(dados);
 
-        return $.post(
-                controller,
-                dados,
-                function (dados) {
-                    console.log(dados[0].COLUMN_NAME);
-                }, "json");
+        return $.ajax({
+            type: "POST",
+            url: controller,
+            data: dados,
+            //success: function(dados){console.log(dados[0]);},
+            dataType: "json"
+        });
     }
 
     function ok() {
