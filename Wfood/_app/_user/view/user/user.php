@@ -21,7 +21,7 @@
 <script async defer>
     $(document).ready(function () {
 
-        //cadastro();
+        cadastro();
         //consultaTab();
         
         

@@ -19,7 +19,7 @@ require('./_config/config.inc.php');
         <!--<script async defer src="_config/config.inc.js"></script>-->
 
         <!--TESTE-->
-        <script async defer src="_app/_user/store/user.js"></script>
+        <script async defer src="_app/_user/store/user_1.js"></script>
 
 
     </head>

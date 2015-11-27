@@ -1,4 +1,4 @@
-/* global GeraForm */
+/* global GeraForm, camposForm*/
 
 $(document).ready(function () {
 
@@ -12,42 +12,18 @@ $(document).ready(function () {
      *  AÇÃO INICIAL
      */
 
-    //camposForm = new Array();
+    camposForm = ({
+        1: 'Nome',
+        2: 'Apelido',
+        3: 'Email',
+        4: 'Celular',
+        5: 'Senha',
+        6: 'CPF',
+        7: 'Data de Nascimento'
+    });
     GeraForm = consultaTab("l_tab", "usuario");
 
-    /*
-     if (GeraForm) {
-     GeraForm.done(
-     function(dados){
-     console.log(dados[0].COLUMN_NAME);
-     });
-     }//*/
-
-
     cadastro();
-
-
-    /**
-     * 
-     * CADASTRO DE USUÁRIO
-     *
-     */
-
-    /*
-     form.submit(function () {
-     
-     var dados = $(this).serialize();
-     //var acao = (":submit", this).attr("name");
-     $.post(
-     controller,
-     dados,
-     function (dados) {
-     console.log(dados.nome + " ok!");
-     }, "json");
-     
-     return false;
-     
-     });//*/
 
     /**
      * 
@@ -59,6 +35,7 @@ $(document).ready(function () {
         //CRIAR FORMULÁRIO
         var form =
                 $('<div>', {
+                    id: "ok",
                     style: "width: 500px;",
                     class: "ui-body ui-body-a ui-corner-all",
                     'data-form': "ui-body-a",
@@ -69,39 +46,35 @@ $(document).ready(function () {
                         name: "user",
                         append: [
                             GeraForm.done(function (dados) {
-                                $.each(dados, function (key, value) {
-                                    $('<div>', {
-                                        text: "ddada",
-                                    });
-                                    console.log(value.COLUMN_NAME);
+                                $.map(dados.reverse(), function (v, i) {
+                                    //camposForm.push("COLUMN_NAME" : v.COLUMN_NAME);
+                                    //console.log(i + ": " + v.COLUMN_NAME + " (" + v.DATA_TYPE + ")");
+                                    //$("#ok").append(document.createTextNode(v.COLUMN_NAME+'\t'));
+                                    if (i == camposForm{){
+                                        console.log(i);
+                                    };
+                                    $("form").prepend(
+                                            $('<div>', {
+                                                class: "ui-field-contain",
+                                                /*###################### < DIV > /*######################*/
+                                                append: $('<div>', {
+                                                    class: "ui-input-text ui-body-a ui-corner-all ui-shadow-inset",
+                                                    /*###################### < INPUT > /*######################*/
+                                                    append: $('<input>', {
+                                                        type: "text",
+                                                        name: v.COLUMN_NAME,
+                                                        id: v.COLUMN_NAME,
+                                                        'data-theme': "a",
+                                                        'data-form': "ui-body-a",
+                                                        class: "input",
+                                                        placeholder: v.COLUMN_NAME
+                                                    })
+                                                })
 
-
-
-
-
-                                    /*###################### < DIV CONTAIN > /*######################//*/
-                                    $('<div>', {
-                                        class: "ui-field-contain",
-                                        /*###################### < DIV > /*######################//*/
-                                        append: $('<div>', {
-                                            class: "ui-input-text ui-body-a ui-corner-all ui-shadow-inset",
-                                            /*###################### < INPUT > /*######################//*/
-                                            append: $('<input>', {
-                                                type: "text",
-                                                name: value.COLUMN_NAME,
-                                                id: value.COLUMN_NAME,
-                                                'data-theme': "a",
-                                                'data-form': "ui-body-a",
-                                                class: "input",
-                                                placeholder: value.COLUMN_NAME
                                             })
-                                        })
+                                            );
 
-                                    });
                                 });
-                            }),
-                            $('<div>', {
-                                text: "d"
                             }),
                             /*###################### < DIV CONTAIN > /*######################*/
                             $('<div>', {

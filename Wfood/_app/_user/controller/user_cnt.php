@@ -39,7 +39,7 @@ switch ($acao):
          */
 
         
-        $Query = "SELECT COLUMN_NAME, DATA_TYPE FROM information_schema.columns WHERE table_name = '{$tabela}' AND ORDINAL_POSITION > 1";
+        $Query = "SELECT COLUMN_NAME, DATA_TYPE FROM information_schema.columns WHERE table_name = '{$tabela}' AND ORDINAL_POSITION > 0";
 
         //  $nCT = nameColumnTable
         $nCT = new read;
