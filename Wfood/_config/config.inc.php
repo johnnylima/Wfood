@@ -28,8 +28,9 @@ define('DBSA', 'wfood');
 
 // AUTO LOAD DE CLASSES ####################
 function __autoload($Class) {
-
-    $root = str_replace("/", DIRECTORY_SEPARATOR, dirname($_SERVER['SCRIPT_FILENAME']));
+    
+    $root = str_replace("/", DIRECTORY_SEPARATOR, dirname($_SERVER['DOCUMENT_ROOT'].'/prototipos/Wfood/Wfood/'));
+    //$root = 'D:\JOHNNY\LOCALHOST\wamp\www\prototipos\Wfood\Wfood\\';
     $ClassExtension = ($Class . ".class.php");
 
     /*     * Faz uma listagem de diretórios diretórios.
@@ -43,16 +44,24 @@ function __autoload($Class) {
      * chamado o include_once;
      */
     
+    //Server();
+ 
+    //var_dump($root);
+
     $root = (isset($root) ? $root : '.'); // Coloque o caminho raiz!
     $root = ($root[strlen($root) - 1] == '\\' || $root[strlen($root) - 1] == '/') ? $root : $root . DIRECTORY_SEPARATOR;
+    
     $empytfile = null;
     
+    //var_dump($root);
+
     $car = "*";
-    $glob = glob($car, GLOB_MARK);
-    while (!empty(glob($car, GLOB_MARK))):
-        if (!empty($FileClass = glob(substr_replace($car, "", -1) . $ClassExtension))):
-            include_once ($root.$FileClass[0]);
-            //var_dump($root.$FileClass[0]);
+    //$glob = glob($root.$car, GLOB_MARK);
+    while (!empty(glob($root.$car, GLOB_MARK))):
+        //var_dump($glob);
+        if (!empty($FileClass = glob(substr_replace($root.$car, "", -1) . $ClassExtension))):
+            include_once ($FileClass[0]);
+            //var_dump($root . $FileClass[0]);
             $empytfile = true;
         endif;
         $car = $car . "\*";
@@ -100,3 +109,57 @@ function PHPMsg($ErrNo, $ErrMsg, $ErrFile, $ErrLine) {
 }
 
 set_error_handler('PHPMsg');
+
+function Server() {
+    $indicesServer = array('PHP_SELF',
+        'argv',
+        'argc',
+        'GATEWAY_INTERFACE',
+        'SERVER_ADDR',
+        'SERVER_NAME',
+        'SERVER_SOFTWARE',
+        'SERVER_PROTOCOL',
+        'REQUEST_METHOD',
+        'REQUEST_TIME',
+        'REQUEST_TIME_FLOAT',
+        'QUERY_STRING',
+        'DOCUMENT_ROOT',
+        'HTTP_ACCEPT',
+        'HTTP_ACCEPT_CHARSET',
+        'HTTP_ACCEPT_ENCODING',
+        'HTTP_ACCEPT_LANGUAGE',
+        'HTTP_CONNECTION',
+        'HTTP_HOST',
+        'HTTP_REFERER',
+        'HTTP_USER_AGENT',
+        'HTTPS',
+        'REMOTE_ADDR',
+        'REMOTE_HOST',
+        'REMOTE_PORT',
+        'REMOTE_USER',
+        'REDIRECT_REMOTE_USER',
+        'SCRIPT_FILENAME',
+        'SERVER_ADMIN',
+        'SERVER_PORT',
+        'SERVER_SIGNATURE',
+        'PATH_TRANSLATED',
+        'SCRIPT_NAME',
+        'REQUEST_URI',
+        'PHP_AUTH_DIGEST',
+        'PHP_AUTH_USER',
+        'PHP_AUTH_PW',
+        'AUTH_TYPE',
+        'PATH_INFO',
+        'ORIG_PATH_INFO');
+
+
+    echo '<hr><pre><table cellpadding="1" style="font-size:12px;">';
+    foreach ($indicesServer as $arg):
+        if (isset($_SERVER[$arg])):
+            echo '<tr><td>' . $arg . '</td><td>=> ' . '<font color="#cc0000">' . $_SERVER[$arg] . '</font></td></tr>';
+        else:
+            echo '<tr><td>' . $arg . '</td><td>=> <i>null</i></td></tr>';
+        endif;
+    endforeach;
+    echo '</font></table><hr>';
+}
